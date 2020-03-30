@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saowalak Wannaket</title>
+    <script src="./js/lib/jquery.min.js"></script>
+    <script src="./js//lib/bootstrap.min.js"></script>
+    <script src="./js/lib/face-api.min.js"></script>
+
+    <script src="./js/lib/pouchdb.min.js"></script>
+    <script src="./js/lib/pouchdb.find.js"></script>
+
+    <link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+      <br>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="row">
+          <div class="col-sm">
+            <video id="webcam" autoplay muted onPlay ="onPlay()" ></video>
+            <canvas id='webcamOverlay' class="overlay" style="display: none;"></canvas>
+          </div>
+          <div class="col-sm">
+            ...
+          </div>
+          </div>
+        </div>
+
+        
+
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <br>
+            <center>
+              <div class="col-sm">
+                <h1>ฟอร์มสมัครงาน</h1>
+                <h2>Resume</h2>
+                <!-- <br> -->
+              </div>
+            </center>
+            
+          <br>
+          <div class="row">
+          <div class="col">
+            <center>
+              <div class="col-sm">
+                คลิกที่นี่เพื่ออัพโหลดรูปภาพ
+              </div>
+              <label id="uploadLable" for="upload">
+              <img id="img" width="250" height="250">
+              </br>
+              </br>
+              <input id="upload" name="upload" type="file" accept="image/*" style="display: none;" />
+              </label>
+            </center>
+          </div>
+
+          <div class="col">
+            <div class="col-sm-4">
+            <h3>ข้อมูลส่วนตัว</h3>
+            </div>
+            <div class="form-group row">
+              <label for="cid" class="col-sm-4 col-form-label" >เลขบัตรประจำตัวประชาชน</label>
+              <div class="col-md-5 mb-3 ">
+                <input type="text" class="form-control" id="cid" placeholder="เลขบัตรประจำตัวประชาชน">
+              </div>
+            </div>
+
+              <div class="form-group row">
+              <label for="title" class="col-sm-4 col-form-label" >คำนำหน้า</label>
+              <div class="col-md-5 mb-3 ">
+              <select class="custom-select" id="title">
+                <option selected>--กรุณาเลือก--</option>
+                <option value="1">นาย</option>
+                <option value="2">นาง</option>
+                <option value="3">นางสาว</option>
+              </select>
+            </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="name" class="col-sm-4 col-form-label" >ชื่อ</label>
+              <div class="col-md-5 mb-3 ">
+                <input type="text" class="form-control" id="name" placeholder="ชื่อ">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="lastname" class="col-sm-4 col-form-label" >นามสกุล</label>
+              <div class="col-md-5 mb-3 ">
+                <input type="text" class="form-control" id="lastname" placeholder="นามสกุล">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="birthday" class="col-sm-4 col-form-label" >วันเกิด</label>
+              <div class="col-md-5 mb-3 ">
+                <input type="text" class="form-control" id="birthday" placeholder="วันเกิด">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="age" class="col-sm-4 col-form-label" >อายุ</label>
+              <div class="col-md-5 mb-3 ">
+                <input type="text" class="form-control" id="age" placeholder="อายุ">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="gender" class="col-sm-4 col-form-label" >เพศ</label>
+              <div class="col-md-5 mb-3 ">
+                <form action="/action_page.php">
+                  <input type="checkbox" name="vehicle1" value="male">
+                  <label for="vehicle1">ชาย</label>
+                  <input type="checkbox" name="vehicle2" value="female">
+                  <label for="vehicle2">หญิง</label>
+                </form>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="address" class="col-sm-4 col-form-label" >ที่อยู่</label>
+              <div class="col-md-5 mb-3 ">
+                <input type="text" class="form-control" id="age" placeholder="ที่อยู่">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="nationality" class="col-sm-4 col-form-label" >สัญชาติ</label>
+              <div class="col-md-5 mb-3 ">
+                <input type="text" class="form-control" id="nationality" placeholder="สัญชาติ">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="religion" class="col-sm-4 col-form-label" >ศาสนา</label>
+              <div class="col-md-5 mb-3 ">
+                <input type="text" class="form-control" id="religion" placeholder="ศาสนา">
+              </div>
+            </div>
+
+            
+
+            
+
+            <div class="form-group row">
+              <center>
+              <button class="btn btn-primary" type="submit" id="profileSubmit">บันทึกข้อมูล</button>
+              </center>
+            </div>
+
+          </div>
+          </div>
+        </div>
+       
+
+      </div>
+
+        
+    </div>
+    <script src="./js/util.js"></script>
+    <script src="./js/webcam.js"></script>
+    <script src="./js/upload.js"></script>
+</body>
+</html>
